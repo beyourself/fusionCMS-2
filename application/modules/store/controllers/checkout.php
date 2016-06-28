@@ -22,8 +22,12 @@ class Checkout extends MX_Controller
 	 */
 	public function index()
 	{
-		$realm = $this->input->post('realm');
-		$cart = $this->input->post("cart");
+		$realm = $this->sanitize(
+			$this->input->post('realm')
+		);
+		$cart = $this->sanitize(
+			$this->input->post("cart")
+		);
 		
 		// Make sure they sent us a cart object
 		if (!$cart)

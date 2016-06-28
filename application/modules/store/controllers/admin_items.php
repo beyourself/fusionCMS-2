@@ -165,6 +165,8 @@ class Admin_items extends MX_Controller
 		$data["dp_price"] = $this->input->post("dpCost");
 		$data["icon"] = $this->input->post("icon");
 		
+		$data = $this->sanitize($data);
+		
 		// If all realms get the first one
 		if ($data["realm"] == -1)
 		{
@@ -285,6 +287,8 @@ class Admin_items extends MX_Controller
 		{
 			$data = $this->getItemData();
 		}
+		
+		$data = $this->sanitize($data);
 
 		$this->items_model->edit($id, $data);
 
@@ -316,9 +320,11 @@ class Admin_items extends MX_Controller
 
 		if(!$data["title"])
 		{
-			die();
+			die("No Title given.");
 		}
 
+		$data = $this->sanitize($data);
+		
 		$this->items_model->editGroup($id, $data);
 
 		// Add log

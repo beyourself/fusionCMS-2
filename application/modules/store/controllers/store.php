@@ -177,7 +177,7 @@ class Store extends MX_Controller
 		// Get the cart save
 		if (isset($_SESSION['store_cart']) && is_array($_SESSION['store_cart']) && (count($_SESSION['store_cart']) > 0))
 		{
-			$cart = $_SESSION['store_cart'];
+			$cart = $this->sanitize($_SESSION['store_cart']);
 			
 			$index = 0;
 			foreach ($cart as $key => $citem)
@@ -311,7 +311,7 @@ class Store extends MX_Controller
 			}
 		}
 		
-		return $data;
+		return $this->sanitize($data);
 	}
 
 	/**
@@ -354,7 +354,7 @@ class Store extends MX_Controller
 				}
 			}
 
-			return $data;
+			return $this->sanitize($data);
 		}
 	}
 	
@@ -384,11 +384,13 @@ class Store extends MX_Controller
 		}
 		else
 		{
-			$_SESSION['store_cart'][$key] = array(
-				'id' => $id,
-				'price' => $price,
-				'priceType' => $priceType,
-				'count' => 1
+			$_SESSION['store_cart'][$key] = $this->sanitize(
+				array(
+					'id' => $id,
+					'price' => $price,
+					'priceType' => $priceType,
+					'count' => 1
+				)
 			);
 		}
 		die;

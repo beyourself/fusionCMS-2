@@ -7,7 +7,7 @@ class Admin extends MX_Controller
 	public function __construct()
 	{
 		parent::__construct();
-
+		
 		// Make sure to load the administrator library!
 		$this->load->library('administrator');
 		$this->load->model('vote_model');
@@ -51,6 +51,8 @@ class Admin extends MX_Controller
 		$data["hour_interval"] = $this->input->post("hour_interval");
 		$data["points_per_vote"] = $this->input->post("points_per_vote");
 		$data["callback_enabled"] = $this->input->post("callback_enabled");
+
+		$data = $this->sanitize($data);
 
 		$this->vote_model->add($data);
 
@@ -135,6 +137,8 @@ class Admin extends MX_Controller
 		$data["hour_interval"] = $this->input->post("hour_interval");
 		$data["points_per_vote"] = $this->input->post("points_per_vote");
 		$data["callback_enabled"] = $this->input->post("callback_enabled");
+
+		$data = $this->sanitize($data);
 
 		$this->vote_model->edit($id, $data);
 

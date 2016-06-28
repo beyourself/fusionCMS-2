@@ -118,8 +118,8 @@ class MX_Controller
 	{
 		if(!CI::$APP->user->isOnline())
 		{
-			$username = CI::$APP->input->cookie("fcms_username");
-			$password = CI::$APP->input->cookie("fcms_password");
+			$username = $this->sanitize(CI::$APP->input->cookie("fcms_username"));
+			$password = $this->sanitize(CI::$APP->input->cookie("fcms_password"));
 
 			if($username && $password)
 			{
@@ -131,5 +131,11 @@ class MX_Controller
 				}
 			}
 		}
+	}
+
+	protected function sanitize($data)
+	{
+		$stripped = is_array($data) ? filter_var_array($data, FILTER_SANITIZE_STRING) : filter_var($data, FILTER_SANITIZE_STRING);
+		return $this->security->xss_clean($stripped);
 	}
 }

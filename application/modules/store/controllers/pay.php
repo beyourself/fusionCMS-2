@@ -25,8 +25,12 @@ class Pay extends MX_Controller
 	 */
 	public function index()
 	{
-		$realmId = $this->input->post('realm');
-		$cart = $this->input->post("data");
+		$realmId = $this->sanitize(
+			$this->input->post('realm')
+		);
+		$cart = $this->sanitize(
+			$this->input->post("data")
+		);
 
 		// Make sure they sent us a cart object
 		if(!$cart)
