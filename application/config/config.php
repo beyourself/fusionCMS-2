@@ -353,6 +353,10 @@ $config['time_reference'] = 'local';
 */
 $config['rewrite_short_tags'] = FALSE;
 
+/**
+ * show page numbers on pagination links
+ */
+$config['display_pages'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------

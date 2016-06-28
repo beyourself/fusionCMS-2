@@ -290,7 +290,7 @@ class Store extends MX_Controller
 		$PaginationConfig['anchor_class'] = 'direct="0" ';
 		
 		$this->pagination->initialize($PaginationConfig); 
-		$data['pagination'] = $this->pagination->create_links();
+		$data['pagination'] = $this->pagination;
 		
 		// Free some mem
 		unset($PaginationConfig, $ItemsLimit, $TotalItems);

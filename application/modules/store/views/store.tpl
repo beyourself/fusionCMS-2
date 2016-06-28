@@ -137,7 +137,7 @@
 			
 			{if $data.pagination}
 			<section class="store-pagination store_buttons">
-				{$data.pagination}
+					{$data.pagination->create_links()}
 			</section>
 			{/if}
 		</section>
