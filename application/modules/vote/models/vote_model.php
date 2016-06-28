@@ -129,22 +129,20 @@ class Vote_model extends CI_Model
 	{
 		if(!$canVote)
 		{
-			$user_ip = $this->input->ip_address();
+			$ip = $this->input->ip_address();
 			
 			$vote_site = $this->getVoteSite($vote_site_id);
 			$time_interval = $vote_site['hour_interval'];
-			$time_back = time() - ($time_interval * 60 * 60);
-		
-			// Check for account or not
-			if(!$this->config->item('vote_ip_lock') && !$vote_site['callback_enabled'])
+			$time = time() - ($time_interval * 60 * 60);
+
+			$clauses = compact('ip', 'user_id', 'time');
+			// !$vote_site['callback_enabled']
+			if($this->config->item('vote_ip_lock'))
 			{
-				$this->db->select('*')->from('vote_log')->where('vote_site_id', $vote_site_id)->where(array('ip' => $user_ip, 'time > ' => $time_back, 'user_id' => $this->user->getId()));
-			}
-			else
-			{
-				$this->db->select('*')->from('vote_log')->where('vote_site_id', $vote_site_id)->where(array('user_id' => $this->user->getId(), 'time > ' => $time_back));
+				unset($clauses['ip']);
 			}
 
+			$this->db->select('*')->from('vote_log')->where('vote_site_id', $vote_site_id)->where($clauses);
 			$query = $this->db->get();
 
 			if($query->num_rows())
@@ -222,7 +220,7 @@ class Vote_model extends CI_Model
 	 * @param $user_id Optional: ID of the user to check
 	 * @param $user_ip Optional: IP of the user to check
 	 */
-	public function canVote($vote_site_id, $user_id = null, $user_ip = null)
+	public function canVote($vote_site_id, $user_id = null, $ip = null)
 	{
 		// Get the vote site
 		$vote_site = $this->getVoteSite($vote_site_id);
@@ -231,30 +229,21 @@ class Vote_model extends CI_Model
 		$time_interval = $vote_site['hour_interval'];
 		
 		// Calculate the that should tell if they voted already or not.
-		$time_back = time() - ($time_interval * 60 * 60);
+		$time = time() - ($time_interval * 60 * 60);
 
 		// check if there are vote logs for this user / ip and time
-		if ($user_ip === null && $user_id === null)
-			$user_ip = $this->input->ip_address();
-		
-		if ($user_id === null)
-			$user_id = $this->user->getId();
-		
-		$sql = '
-			SELECT * 
-			FROM `vote_log`
-			WHERE 
-			`vote_site_id` = ? AND `time` > ?
-		';
-		
-		if ($this->config->item('vote_ip_lock') && $user_ip) {
-			$sql .= " AND (user_id = ".$this->db->escape($user_id)." OR ip = ".$this->db->escape($user_ip).")";
+		$ip = !is_null($ip) ?: $this->input->ip_address();
+		$user_id = !is_null($user_id) ?: $this->user->getId();
+
+		$clauses = compact('ip', 'user_id', 'time');
+		// !$vote_site['callback_enabled']
+		if($this->config->item('vote_ip_lock'))
+		{
+			unset($clauses['ip']);
 		}
-		else {
-			$sql .= " AND user_id = ".$this->db->escape($user_id);
-		}
-		
-		$query = $this->db->query($sql, array($vote_site_id, $time_back));
+
+		$this->db->select('*')->from('vote_log')->where('vote_site_id', $vote_site_id)->where($clauses);
+		$query = $this->db->get();
 		
 		if($query->num_rows() > 0)
 		{
