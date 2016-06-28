@@ -142,7 +142,7 @@ class Vote_model extends CI_Model
 				unset($clauses['ip']);
 			}
 
-			$query = $this->db->where($clauses)->where('time', '<', $time)->get('vote_log');
+			$query = $this->db->where($clauses)->where('time <', $time)->get('vote_log');
 
 			if($query->num_rows())
 			{
@@ -241,7 +241,7 @@ class Vote_model extends CI_Model
 			unset($clauses['ip']);
 		}
 
-		$query = $this->db->where($clauses)->where('time', '>=', $time)->get('vote_log');
+		$query = $this->db->where($clauses)->where('time >=', $time)->get('vote_log');
 		
 		if($query->num_rows() > 0)
 		{
