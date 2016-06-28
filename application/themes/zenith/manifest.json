@@ -1,0 +1,19 @@
+{
+	"name": "Klimax 3.3.5a",
+	"author": "AwkwardDev",
+	"website": "http://www.community.klimax.mwow.dk/",
+	
+	"favicon": "favicon.png?v=2",
+
+	"normal_avatar": "avatars/0_normal.jpg",
+	"small_avatar": "avatars/0_small.jpg",
+
+	"slider_text": {
+		"next": "",
+		"previous": ""
+	},
+
+	"slider_id": "slider_bg",
+	"screenshot": "images/screenshot.jpg",
+	"blank_header": ""
+}

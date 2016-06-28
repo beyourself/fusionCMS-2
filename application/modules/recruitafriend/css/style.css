@@ -1,0 +1,15 @@
+#raf_titles h3 {
+    margin-bottom: 10px;
+    font-size: 22px;
+    display:block;
+    padding:0 0 10px 10px;
+    box-shadow: 0 2px 0 rgba(255,255,255,.12);
+    color:#b38e3f;
+}
+
+
+.raf_table {
+    background: rgba(153,153,153,0.05);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,.02), 0 0 4px rgba(0,0,0,.6);
+    border-radius:5px;
+}

@@ -1,0 +1,10 @@
+{
+	"name":"top100hkills",
+	"description":"Statistic of honorable kills, max 100 players shown.",
+	"author":
+	{
+		"name":"AwkwardDev",
+		"website":""
+	},
+	"enabled":true
+}

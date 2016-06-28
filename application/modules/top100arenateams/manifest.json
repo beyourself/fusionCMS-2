@@ -1,0 +1,10 @@
+{
+	"name":"top100arenateams",
+	"description":"Statistics of all arena team types. Max 100 shown.",
+	"author":
+	{
+		"name":"AwkwardDev",
+		"website":""
+	},
+	"enabled":true
+}

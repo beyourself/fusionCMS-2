@@ -1,0 +1,10 @@
+{
+	"name":"Sidebox: Current Server Time",
+	"description":"Displays the currently set server time.",
+	"author":
+	{
+		"name":"AwkwardDev",
+		"website":"none"
+	},
+	"enabled":true
+}
