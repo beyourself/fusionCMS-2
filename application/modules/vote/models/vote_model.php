@@ -231,10 +231,10 @@ class Vote_model extends CI_Model
 		$time = time() - ($time_interval * 60 * 60);
 
 		// check if there are vote logs for this user / ip and time
-		$ip = !is_null($ip) ?: $this->input->ip_address();
-		$user_id = !is_null($user_id) ?: $this->user->getId();
+		$ip = !is_null($ip) ? $ip : $this->input->ip_address();
+		$user_id = !is_null($user_id) ? $user_id : $this->user->getId();
 
-		$clauses = compact('ip', 'user_id', 'time');
+		$clauses = compact('vote_site_id', 'ip', 'user_id', 'time');
 		// !$vote_site['callback_enabled']
 		if($this->config->item('vote_ip_lock'))
 		{
