@@ -135,15 +135,14 @@ class Vote_model extends CI_Model
 			$time_interval = $vote_site['hour_interval'];
 			$time = time() - ($time_interval * 60 * 60);
 
-			$clauses = compact('ip', 'user_id', 'time');
+			$clauses = compact('vote_site_id', 'ip', 'user_id', 'time');
 			// !$vote_site['callback_enabled']
 			if($this->config->item('vote_ip_lock'))
 			{
 				unset($clauses['ip']);
 			}
 
-			$this->db->select('*')->from('vote_log')->where('vote_site_id', $vote_site_id)->where($clauses);
-			$query = $this->db->get();
+			$query = $this->db->get_where('vote_log', $clauses);
 
 			if($query->num_rows())
 			{
@@ -242,8 +241,7 @@ class Vote_model extends CI_Model
 			unset($clauses['ip']);
 		}
 
-		$this->db->select('*')->from('vote_log')->where('vote_site_id', $vote_site_id)->where($clauses);
-		$query = $this->db->get();
+		$query = $this->db->get_where('vote_log', $clauses);
 		
 		if($query->num_rows() > 0)
 		{
