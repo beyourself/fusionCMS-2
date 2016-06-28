@@ -105,7 +105,7 @@
             </div>
             <footer>
                 All multimedia components of this website are sole property of the appropriate owner and their use is attributed only to the entertainment of the visitor.</br>
-                Copyright 2009 - 2016 <a href="http://klimax.mwow.dk/">www.klimax.mwow.dk</a> and its content are in no way affiliated with, associated with or endorsed by <a href="http://blizzard.com/">Blizzard Entertainment</a>!<br/>
+                Copyright 2009 - 2016 <a href="http://klimax-wow.com/">www.klimax-wow.com</a> and its content are in no way affiliated with, associated with or endorsed by <a href="http://blizzard.com/">Blizzard Entertainment</a>!<br/>
                 <a href="http://battle.net/wow/">World of Warcraft©</a> and <a href="http://blizzard.com/">Blizzard Entertainment©</a> are all trademarks and/or registered trademarks of <a href="http://blizzard.com/">Blizzard Entertainment</a> in the United States and/or other countries.<br/>
                 No financial amenities are sought from the success of this multimedia website.
 {literal}

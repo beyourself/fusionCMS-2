@@ -17,8 +17,8 @@ $config['donation_currency_sign'] = "$";
 
 $config['donate_paypal'] = array(
  'use' => true, // true: enable | false: disable
- 'postback_url' => "http://klimax.mwow.dk/donate/postback_paypal",
- 'return_url' => "http://klimax.mwow.dk/donate/success",
+ 'postback_url' => "http://klimax-wow.com/donate/postback_paypal",
+ 'return_url' => "http://klimax-wow.com/donate/success",
  'email' => "achibod.cranee@mail.com",
  'sandbox' => false, // false: live servers | true: testing/dev servers
  

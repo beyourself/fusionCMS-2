@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url'] =  'http://klimax.mwow.dk/';
+$config['base_url'] =  'http://klimax-wow.com/';
 
 /*
 |--------------------------------------------------------------------------

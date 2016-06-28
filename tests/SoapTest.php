@@ -9,7 +9,7 @@ class SoapTest extends TestCase
 {
     // Change these
     protected $config = [
-        'hostname'          =>  'play.klimax.mwow.dk',
+        'hostname'          =>  'play.klimax-wow.com',
         'console_port'      =>  '7878',
         'console_username'  =>  'test',
         'console_password'  =>  'test'
