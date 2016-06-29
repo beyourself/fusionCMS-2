@@ -137,7 +137,7 @@ class Vote_model extends CI_Model
 
 			$clauses = compact('vote_site_id', 'ip', 'user_id');
 			// !$vote_site['callback_enabled']
-			if($this->config->item('vote_ip_lock'))
+			if(!$this->config->item('vote_ip_lock'))
 			{
 				unset($clauses['ip']);
 			}
@@ -236,7 +236,7 @@ class Vote_model extends CI_Model
 
 		$clauses = compact('vote_site_id', 'ip', 'user_id');
 		// !$vote_site['callback_enabled']
-		if($this->config->item('vote_ip_lock'))
+		if(!$this->config->item('vote_ip_lock'))
 		{
 			unset($clauses['ip']);
 		}
