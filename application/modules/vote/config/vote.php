@@ -9,5 +9,5 @@
 |
 */
 
-$config['vote_ip_lock'] = true;
+$config['vote_ip_lock'] = false;
 $config['delete_old_votes'] = true;
