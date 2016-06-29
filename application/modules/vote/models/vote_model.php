@@ -21,8 +21,9 @@ class Vote_model extends CI_Model
 		{
 			foreach($this->vote_sites as $key => $value)
 			{
-				$this->vote_sites[$key]['canVote'] = $this->canVote($value['id']);
-				$this->vote_sites[$key]['nextVote'] = $this->getNextTime($this->vote_sites[$key]['canVote'], $value['id']);
+				$canVote = (bool)$this->canVote($value['id']);
+				$this->vote_sites[$key]['canVote'] = $canVote;
+				$this->vote_sites[$key]['nextVote'] = $canVote ? false : $this->getNextTime($value['id']);
 			}
 		}
 	}
@@ -125,12 +126,11 @@ class Vote_model extends CI_Model
 		$this->db->query("DELETE FROM vote_log WHERE `time` < (SELECT MAX(hour_interval) * 3600 FROM vote_sites)", array($time_back));
 	}
 
-	public function getNextTime($canVote, $vote_site_id)
+	public function getNextTime($vote_site_id)
 	{
-		if(!$canVote)
-		{
 			$ip = $this->input->ip_address();
-			
+			$user_id = $this->user->getId();
+
 			$vote_site = $this->getVoteSite($vote_site_id);
 			$time_interval = $vote_site['hour_interval'];
 			$time = time() - ($time_interval * 60 * 60);
@@ -146,7 +146,7 @@ class Vote_model extends CI_Model
 			// then calculate a next available time.
 			$query = $this->db->where($clauses)->where('time >=', $time)->get('vote_log');
 
-			if($query->num_rows())
+			if($query->num_rows() > 0)
 			{
 				$row = $query->result_array();
 
@@ -159,7 +159,6 @@ class Vote_model extends CI_Model
 			{
 				return false;
 			}
-		}
 	}
 	
 	public function vote_log($user_id, $user_ip, $voteSiteId)
