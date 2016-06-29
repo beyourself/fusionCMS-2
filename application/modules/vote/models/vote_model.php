@@ -142,6 +142,8 @@ class Vote_model extends CI_Model
 				unset($clauses['ip']);
 			}
 
+			// If time is greater than or equal to,
+			// then calculate a next available time.
 			$query = $this->db->where($clauses)->where('time >=', $time)->get('vote_log');
 
 			if($query->num_rows())
@@ -241,7 +243,9 @@ class Vote_model extends CI_Model
 			unset($clauses['ip']);
 		}
 
-		$query = $this->db->where($clauses)->where('time <', $time)->get('vote_log');
+		// If time is less than or equal to,
+		// then that user has already voted once.
+		$query = $this->db->where($clauses)->where('time <=', $time)->get('vote_log');
 		
 		if($query->num_rows() > 0)
 		{
